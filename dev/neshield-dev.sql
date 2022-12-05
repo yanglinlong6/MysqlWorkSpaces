@@ -55,3 +55,49 @@ where tu.tenant_id = 44
   and tv.del_flag = 0
   and tv.del_flag = 0
   and tu.del_flag = 0;
+
+select turr.user_id      as userId,
+       turr.role_id      as roleId,
+       tm.menu_no        as menuNo,
+       tm.menu_name      as menuName,
+       tm.permission_tag as permissionTag
+from t_role_menu trm
+         left join t_menu tm on trm.menu_id = tm.menu_no
+         left join t_user_role_relation turr on trm.role_id = turr.role_id
+where trm.del_flag = 0
+  and tm.del_flag = 0
+  and turr.del_flag = 0
+  and tm.enable_status = 1
+  and tm.permission_tag = 'vehicle_vin_frequency'
+  and turr.user_id in (1048);
+
+select *
+from t_user
+where id = 1048;
+
+select *
+from t_user_role_relation
+where user_id = 1048;
+
+select *
+from t_role_menu
+where role_id = 64
+  and menu_id = 6010211;
+
+select *
+from t_workorder
+where id = 33707;
+
+select *
+from t_workorder_vehicle
+where workorder_id = 33707;
+
+select *
+from t_workorder_vehicle_device
+where workorder_id = 33707;
+
+select *
+from t_workorder_documents
+where workorder_id = 33707;
+
+select sysdate();

@@ -58,3 +58,60 @@ where status = 0
 select area, areaId
 from d_vehicle_workorder
 where orderType = 'PAZL';
+
+select *
+from t_track_stujudge_alarm
+where sn = '1620830683';
+
+select *
+from t_track_stujudge_alarm
+where poi_type is not null;
+
+select *
+from d_electric_fence_alarm
+where sn = '15209040250';
+
+select *
+from d_vehicle
+where standno = 'LFV3A23C2J3009965';
+
+select *
+from d_track_info
+where userId in (3226263, 3226201);
+
+select *
+from d_electric_fence_alarm
+where sn = 15204120221;
+
+select *
+from d_electric_fence_sns
+where sn = 15209040250;
+
+select *
+from d_electric_fence
+where id in (7016, 7017);
+
+select *
+from d_track_info
+where sn = 15204120221;
+
+select *
+from d_vehicle
+where userId = 3157145;
+
+select *
+from d_vehicle
+where vehicleId = 994713;
+
+select dv.idnum, dv.name as ownerName, dv.standno
+from d_vehicle dv
+         left join d_electric_fence_sns defs on defs.standno = dv.standno
+         left join d_electric_fence def on def.id = defs.fenceId
+where def.id = 7016;
+
+select dv.idnum, dv.name as ownerName
+from d_vehicle dv
+         left join d_track_info dti on dti.userId = dv.userId
+where dv.status = 0
+  and dti.sn = 15204120221;
+

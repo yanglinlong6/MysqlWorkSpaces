@@ -46,3 +46,7 @@ select *
 from sys_order_audit_status
 where order_id = 297555;
 
+select *
+from sys_order
+where vin_no = 'LDP31B96XNG132902';
+

@@ -555,3 +555,31 @@ from t_city tc
          left join t_city tc1 on tc1.id = tc.parent_id
          left join t_city tc2 on tc2.id = tc1.parent_id
 where tc.id = 110000;
+
+select *
+from d_electric_fence
+where id = 743;
+
+select dv.idnum, dv.name as ownerName, dv.standno
+from d_vehicle dv
+         left join d_electric_fence_sns defs on defs.standno = dv.standno
+         left join d_electric_fence def on def.id = defs.fenceId
+where def.id = 770;
+
+select dti.sn
+from d_vehicle dv
+         left join d_track_info dti on dti.userId = dv.userId
+where dv.status = 0
+  and dv.standno = 'GLCW2021102010001';
+
+select dv.idnum, dv.name as ownerName
+from d_vehicle dv
+         left join d_track_info dti on dti.userId = dv.userId
+where dv.status = 0
+  and dti.sn = 32146525113;
+
+select dv.idnum, dv.name as ownerName
+from d_vehicle dv
+         left join d_track_info dti on dti.userId = dv.userId
+where dv.status = 0
+  and dti.sn = 8160602923;

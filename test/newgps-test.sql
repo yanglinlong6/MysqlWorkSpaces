@@ -11,3 +11,9 @@ where tc.id = 440305;
 select *
 from t_city
 where area_name like '%南山%';
+
+select dv.idnum, dv.name as ownerName, dv.standno
+from d_vehicle dv
+         left join d_electric_fence_sns defs on defs.standno = dv.standno
+         left join d_electric_fence def on def.id = defs.fenceId
+where def.id = 770;
