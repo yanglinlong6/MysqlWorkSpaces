@@ -1,5 +1,5 @@
-('GPS','OBD')
-dj_2022_settlment_order_finance_06plus
+# ('GPS','OBD')
+# dj_2022_settlment_order_finance_06plus
 select A.cus_name,
        A.sale_type,
        A.monthx                 '月份',
@@ -108,25 +108,24 @@ where total < 0
   and business_type = 'SAAS系统订阅服务—旧版本'
   and finance_time >= '2022-09-01'
   and product_name <> '销售折扣'
-    '六盘水天驰汽车有限公司'
+#     '六盘水天驰汽车有限公司'
 select id, sn, delivery_order, delivery_time, settle_merchant
 from dj_2021_settle_details
 where settle_merchant = '六盘水天驰汽车有限公司'
-
   and delivery_time < '2022-12-31 00:00:00'
 order by delivery_time desc
-limit 8
+limit 8;
 
 
 SELECT *
 from dj_2022_settle_details_return
-where settle_time > '2022-09-01'
-
+where settle_time > '2022-09-01';
 
 
 SELECT *
 FROM dj_2022_settlment_order_06plus
-where product_name = '销售折扣'
+where product_name = '销售折扣';
+
 
 SELECT *
 FROM dj_2021_delivery_device
@@ -135,12 +134,13 @@ WHERE customer_name <> ''
 
 SELECT *
 FROM dj_2021_delivery_device
-limit 100
+limit 100;
 
 SELECT *
 from dj_2022_settlment_order_06plus
 where cus_name = '恒信汽车集团股份有限公司'
-  and total < 0
+  and total < 0;
+
 
 SELECT *
 FROM dj_2022_settlment_order_06plus
@@ -148,10 +148,12 @@ where `status` <> 1
   and device_type in ('GPS', 'OBD', '记录仪', '车充')
   and product_type in ('硬件')
   and business_type = 'SAAS系统订阅服务—旧版本'
-  and finance_time >= '2022-09-01'
+  and finance_time >= '2022-09-01';
+
 
 
 SELECT device_type, COUNT(1)
 from dj_2021_settle_details
 where settle_merchant = '安徽优盾信息科技有限公司'
-GROUP BY device_type
+GROUP BY device_type;
+

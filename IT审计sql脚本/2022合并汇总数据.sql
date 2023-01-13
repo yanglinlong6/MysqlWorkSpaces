@@ -9,29 +9,20 @@ group by device_type;
 
 #
 
-'''
-记录仪&车充合并
+# 记录仪&车充合并
 insert into dj_2021_settle_details (`channel`,`sn`,`iccid`,`device_type`,`material_code`,`delivery_order`,`delivery_time`,`delivery_merchant`,`active_time`,`active_merchant`,`pk_name`,
 `pk_period`,`settle_merchant`,`settle_order`,`settle_time`,`pk_price`,`pk_price_tax`,`hw_price`,`hw_price_tax`,`install_price`,`install_price_tax`,`cost`,`flag`,`return`)
 SELECT `channel`,`sn`,`iccid`,`device_type`,`material_code`,`delivery_order`,`delivery_time`,`delivery_merchant`,`active_time`,`active_merchant`,`pk_name`,
 `pk_period`,`settle_merchant`,`settle_order`,`settle_time`,`pk_price`,`pk_price_tax`,`hw_price`,`hw_price_tax`,`install_price`,`install_price_tax`,`cost`,`flag`,`return` from 
-dj_2022_settle_details_record where settle_time >='
-2022-09-01
-';
-'''
+dj_2022_settle_details_record where settle_time >='2022-09-01';
 
 
-'''
-追踪器合并
+# 追踪器合并
 insert into dj_2021_settle_details (`channel`,`sn`,`iccid`,`device_type`,`material_code`,`delivery_order`,`delivery_time`,`delivery_merchant`,`active_time`,`active_merchant`,`pk_name`,
 `pk_period`,`settle_merchant`,`settle_order`,`settle_time`,`pk_price`,`pk_price_tax`,`hw_price`,`hw_price_tax`,`install_price`,`install_price_tax`,`cost`,`flag`,`return`)
 SELECT `channel`,`sn`,`iccid`,`device_type`,`material_code`,`delivery_order`,`delivery_time`,`delivery_merchant`,`active_time`,`active_merchant`,`pk_name`,
 `pk_period`,`settle_merchant`,`settle_order`,`settle_time`,`pk_price`,`pk_price_tax`,`hw_price`,`hw_price_tax`,`install_price`,`install_price_tax`,`cost`,`flag`,`return` from 
-dj_2022_settle_details where settle_time >='
-2022-09-01
-';
-'''
-
+dj_2022_settle_details where settle_time >='2022-09-01';
 
 
 
