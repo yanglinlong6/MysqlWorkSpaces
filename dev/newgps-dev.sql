@@ -583,3 +583,418 @@ from d_vehicle dv
          left join d_track_info dti on dti.userId = dv.userId
 where dv.status = 0
   and dti.sn = 8160602923;
+
+select *
+from d_vehicle_workorder
+where orderType = 'pazl'
+  and status = 1;
+
+select *
+from d_vehicle
+where workOrderId = 829136;
+
+CREATE TABLE `d_location_check_log`
+(
+    `id`          int(11)  NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `sn`          varchar(256) DEFAULT NULL COMMENT '设备号',
+    `remark`      varchar(256) DEFAULT NULL COMMENT '设备定位备注',
+    `create_time` datetime null comment '创建时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8 COMMENT ='设备定位验证日志表';
+
+CREATE TABLE `d_feedback_param`
+(
+    `id`                     int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `order_id`               int(11)      DEFAULT NULL COMMENT '工单ID',
+    `sqbh`                   varchar(50)  DEFAULT NULL COMMENT '工单申请编号',
+    `vin`                    varchar(50)  DEFAULT NULL COMMENT '车架号',
+    `actual_install_address` varchar(256) DEFAULT NULL COMMENT '实际按照地址',
+    `actual_install_name`    varchar(256) DEFAULT null comment '实际安装人',
+    `create_time`            datetime     DEFAULT null comment '创建时间',
+    PRIMARY KEY (`id`),
+    KEY `idx_order_id` (`order_id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8 COMMENT ='平安工单激活反馈参数';
+
+select *
+from t_track_stujudge_alarm;
+
+
+select dv.vehicleId,
+       dv.name       as ownerName,
+       dvw.shopName,
+       dvw.sqbh,
+       dv.standno,
+       dvw.source,
+       dvw.no_source as noSource,
+       dv.createtime as createTime,
+       dvw.standnoHash
+from d_vehicle dv
+         left join d_vehicle_workorder dvw on dvw.workOrderId = dv.workOrderId
+where dv.status = 0
+  and dvw.status = 1
+#           and dvw.standnoHash = #{standnoHash}
+order by createTime desc
+
+select *
+from d_vehicle_workorder
+where standnoHash = 'e604888b7e67eb49700838ce1c6f7cc0';
+
+select workOrderId
+from d_vehicle
+where standno = 'LYF16666634802940';
+
+select *
+from d_vehicle_workorder
+where workOrderId = 829254;
+
+select *
+from d_feedback_param;
+
+select *
+from d_track_info
+where isActive = 0
+  and source = 1;
+
+select *
+from d_location_check_log;
+
+select *
+from t_track_stujudge_alarm
+where sn = '1570921349';
+
+select *
+from d_user
+where username = 'pingan';
+
+select *
+from d_user
+where username = 'admin';
+
+explain
+select dv.vehicleId,
+       dv.name       as ownerName,
+       dvw.shopName,
+       dvw.sqbh,
+       dv.standno,
+       dvw.source,
+       dvw.no_source as noSource,
+       dvw.workOrderId
+from d_vehicle dv
+         left join d_vehicle_workorder dvw on dvw.workOrderId = dv.workOrderId
+where dv.status = 0
+  and dvw.status = 1
+  and dvw.standnoHash = 'e604888b7e67eb49700838ce1c6f7cc0'
+order by dv.vehicleId desc;
+
+select *
+from d_vehicle_workorder
+where standnoHash = 'e604888b7e67eb49700838ce1c6f7cc0';
+
+select *
+from d_vehicle_workorder
+where sqbh = 'PA1539170682351521792';
+
+select *
+from d_vehicle
+where standno = 'PA12*********6543';
+
+insert into d_vehicle_workorder(classId, name, identityCard, standno, standnoHash, userTel, userSex, shopContacts,
+                                contactsPhone, fix_time, status, lastLoginUserId, activeTime, activeMan, sendStatus,
+                                area, shopName, color, brandid, brand, carType, carTypeName, carSystem, carSystemName,
+                                isDvd, creditPeriod, rent, address, cycle, ishandsel, branch, branchCompanyTel, sqbh,
+                                orderNum, projectNum, contractNo, createtime, idnum, noticeUser, engine, displacement,
+                                remark, importdate, description, createUserId, productType, province, city, orderType,
+                                orderSource, creditLimit, installMethod, shop_addr, fix_area, fix_phone, source,
+                                no_source, obd_cnt, pa, record, areaId, dispatchEmail, insuranceFlag, fund,
+                                isselfcollection, business_type, install_name, message_phone, area_id, gongdanId,
+                                contractId, refOrderId, bizOrderType, gpsSupplier, vehicle_type, vehiclePrice,
+                                insurancePolicyHolder, insuranceFirstBeneficiary, insuranceCertificate,
+                                insuranceTelephone)
+select classId,
+       name,
+       identityCard,
+       standno,
+       standnoHash,
+       userTel,
+       userSex,
+       shopContacts,
+       contactsPhone,
+       fix_time,
+       status,
+       lastLoginUserId,
+       activeTime,
+       activeMan,
+       sendStatus,
+       area,
+       shopName,
+       color,
+       brandid,
+       brand,
+       carType,
+       carTypeName,
+       carSystem,
+       carSystemName,
+       isDvd,
+       creditPeriod,
+       rent,
+       address,
+       cycle,
+       ishandsel,
+       branch,
+       branchCompanyTel,
+       sqbh,
+       orderNum,
+       projectNum,
+       contractNo,
+       createtime,
+       idnum,
+       noticeUser,
+       engine,
+       displacement,
+       remark,
+       importdate,
+       description,
+       createUserId,
+       productType,
+       province,
+       city,
+       orderType,
+       orderSource,
+       creditLimit,
+       installMethod,
+       shop_addr,
+       fix_area,
+       fix_phone,
+       source,
+       no_source,
+       obd_cnt,
+       pa,
+       record,
+       areaId,
+       dispatchEmail,
+       insuranceFlag,
+       fund,
+       isselfcollection,
+       business_type,
+       install_name,
+       message_phone,
+       area_id,
+       gongdanId,
+       contractId,
+       refOrderId,
+       bizOrderType,
+       gpsSupplier,
+       vehicle_type,
+       vehiclePrice,
+       insurancePolicyHolder,
+       insuranceFirstBeneficiary,
+       insuranceCertificate,
+       insuranceTelephone
+from d_vehicle_workorder
+where workOrderId = 829213;
+
+insert into d_vehicle (idnum, classId, vehicleTypeId, displacement, buyDate, mileage, name, standno, noticuser, userSex,
+                       userTel, shopcontactor, shopPhone, lastLoginUserId, createtime, updatetime, userId, isSubUserId,
+                       workOrderId, endtime, isuse, engine, remark, description, status, fix_time, validateStatus, acc,
+                       validateInfo, createUserId, activeUserId, sync_neshield_flag)
+SELECT idnum,
+       classId,
+       vehicleTypeId,
+       displacement,
+       buyDate,
+       mileage,
+       name,
+       standno,
+       noticuser,
+       userSex,
+       userTel,
+       shopcontactor,
+       shopPhone,
+       lastLoginUserId,
+       createtime,
+       updatetime,
+       userId,
+       isSubUserId,
+       829275,
+       endtime,
+       isuse,
+       engine,
+       remark,
+       description,
+       status,
+       fix_time,
+       validateStatus,
+       acc,
+       validateInfo,
+       createUserId,
+       activeUserId,
+       sync_neshield_flag
+from d_vehicle
+where vehicleId = 805768;
+
+select *
+from d_feedback_param;
+
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1482200741698473984', 'LFV3214G3C3090321', '广东省深圳市南山区桃园路', 'jack测试');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1482203282842718208', 'LFV3214G3C3090323', '广东省深圳市南山区桃园路', 'jack测试');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022011800001', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022011800002', '12345678998765431', '广东省深圳市南山区仙科路', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022011800003', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012000001', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012000002', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1484401471117201408', 'LFV3*********0401', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1484401729326944256', 'LFV3*********0402', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012400001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012400002', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012400003', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012500002', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012500001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202202160002', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202202160003', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202202160004', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1539170682351521792', 'PA123456789876543', '北京市朝阳区石景山公园', '流传奇');
+
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1482200741698473984', 'LFV3214G3C3090321', '广东省深圳市南山区桃园路', 'jack测试');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1482203282842718208', 'LFV3214G3C3090323', '广东省深圳市南山区桃园路', 'jack测试');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022011800001', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022011800002', '12345678998765431', '广东省深圳市南山区仙科路', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022011800003', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012000001', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012000002', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1484401471117201408', 'LFV3*********0401', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1484401729326944256', 'LFV3*********0402', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012400001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012400002', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012400003', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012500002', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX2022012500001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202202160002', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202202160003', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202202160004', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202203210001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202203210005', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202203230001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202203300001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1526132883562041344', 'PA123202205161729', '广东省深圳市龙华区观盛东路', '实名认证');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1526133271866511360', 'PA123202205161731', '广东省深圳市龙华区观盛东路', '实名认证');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202205170001', '12345678998765433', '广东省深圳市龙华区观盛东路', '实名认证');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202205170002', '12345678998765433', '广东省深圳市龙华区观盛东路', '实名认证');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGL-392254-2022PAZL106109569-ZL-01-0606103201504', 'W1K6X6BB0NA114188', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGL-392254-2022PAZL106109569-ZL-01-0607102618174', '1FDWW37P67EB14803', '广东省深圳市南山区留仙大道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGL-392254-2022PAZL106109569-ZL-01-0607162437530', '1G8JW54R73Y585474', '广东省深圳市福田区滨河大道辅道', '扫码2');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1538708515496005632', 'PA123456789876543', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1538790231879323648', 'PA20*********5001', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202206210001', '12345678998765433', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202206230001', '12345678998765431', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202206230003', '12345678998765433', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202206230004', '12345678998765434', '广东省深圳市南山区桃园路2号', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202206230006', '12345678998765436', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202206230005', '12345678998765435', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202206260002', '12345678998765432', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202206260003', '12345678998765433', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202206260004', '12345678998765434', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1541303280058109952', 'PA202206271411001', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1541303717511434240', 'PA202206271412001', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1541304219716423680', 'PA202206271415001', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1541304426243952640', 'PA202206271416001', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202206260005', '12345678998765434', '广东省深圳市南山区仙科路', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1563096539402997760', 'PA123202208261729', '广东省深圳市南山区塘益路191-1号', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PAGLSX202210120001', '12345678998765434', '广东省深圳市南山区塘益路191-1号', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1589505950459498496', 'PA123202211071431', '广东省深圳市南山区塘益路191-1号', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1595682824223068160', 'PA123202205161731', '广东省深圳市南山区桃园路2号', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1600049792334041088', 'PA123202205161731', '广东省深圳市南山区桃园路2号', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1601155952730574848', 'PA123202205161735', '广东省深圳市南山区桃园路2号', 'xjq');
+INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
+VALUES ('PA1607637216824266752', 'PA123202205161741', '广东省深圳市南山区桃园路2号', 'xjq');
+
+
+update d_feedback_param dfp left join d_vehicle_workorder dvw on dvw.sqbh = dfp.sqbh
+set dfp.order_id = dvw.workOrderId
+where dvw.status = 0;
+
+select *
+from t_track_stujudge_alarm;
+
+select *
+from d_app_image
+where workOrderId = 829278;
+
+select *
+from d_app_image_delete
+where workOrderId = 829278;
+
+select *
+from d_device_login
+where sn in (1700112234, 1570916886);
