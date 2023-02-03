@@ -503,3 +503,6 @@ ALTER TABLE t_vehicle_log
     modify remark varchar(1024) DEFAULT null comment '备注';
 ALTER TABLE t_vehicle
     modify remark varchar(1024) DEFAULT null comment '备注';
+
+select *
+from t_device_location order by id desc ;
