@@ -103,3 +103,109 @@ as B ON (B.cus_name = A.cus_name AND a.monthx = B.monthx);
 
 select * from dj_2021_settle_details  where DATE_FORMAT(settle_time,'%Y-%m') = '2022-12' and device_type in (8) and settle_merchant = '庞大精配网（天津）网络科技有限公司';
 
+SELECT settle_merchant as cus_name,DATE_FORMAT(settle_time,'%Y-%m') as monthx,COUNT(1) as total,
+(SUM(case when install_price is NULL then 0 else install_price end) ) as income
+ from dj_2021_settle_details where date_format(settle_time,'%Y-%m') = '2022-08' and device_type = 8
+GROUP BY settle_merchant,DATE_FORMAT(settle_time,'%Y-%m')
+
+
+select * from dj_system_merchant;
+
+select DATE_FORMAT(created_date, '%Y-%m'), count(1) as num
+from dj_system_merchant
+where DATE_FORMAT(created_date, '%Y-%m') >= '2020-01'
+   and DATE_FORMAT(created_date, '%Y-%m') <= '2022-12'
+   and deleted_flag = 'N'
+group by DATE_FORMAT(created_date, '%Y-%m')
+order by DATE_FORMAT(created_date, '%Y-%m') ;
+
+select province_name, count(1) as num
+from dj_system_merchant
+where DATE_FORMAT(created_date, '%Y-%m') >= '2018-01'
+  and province_name is not null
+  and deleted_flag = 'N'
+group by province_name
+order by num ;
+
+select active_merchant
+from dj_2021_settle_details;
+
+set @yearStart = '2017-01-01';
+set @yearEnd = '2018-01-01';
+SELECT count(DISTINCT active_merchant) from dj_2021_settle_details where active_merchant <> '' and
+((active_time < @yearStart and DATE_ADD(active_time,INTERVAL pk_period MONTH) > @yearEnd) or
+active_time >= @yearStart and active_time < @yearEnd);
+
+set @monthStart = '2022-02-01';
+set @monthEnd = '2022-03-01';
+SELECT count(DISTINCT active_merchant) from dj_2021_settle_details where active_merchant <> '' and
+((active_time < @yearStart and DATE_ADD(active_time,INTERVAL pk_period MONTH) > @yearEnd) or
+active_time >= @yearStart and active_time < @yearEnd);
+
+set @monthStart = '2022-02-01';
+set @monthEnd = '2022-03-01';
+SELECT count(DISTINCT active_merchant) from dj_2021_settle_details where active_merchant <> '' and
+((active_time < '2022-02-01' and DATE_ADD(active_time,INTERVAL pk_period MONTH) > '2022-03-01') or
+active_time >= '2022-02-01' and active_time < '2022-03-01');
+
+select distinct pk_period
+from dj_2021_settle_details ;
+
+SELECT count(DISTINCT active_merchant) as num from dj_2021_settle_details where active_merchant <> '' and
+        ((DATE_FORMAT(active_time, '%Y-%m') = '2022-02' and DATE_FORMAT(DATE_ADD(active_time,INTERVAL pk_period MONTH),'%Y-%m') > '2022-02') or
+        DATE_FORMAT(active_time, '%Y-%m') = '2022-02');
+
+SELECT count(DISTINCT active_merchant) as num from dj_2021_settle_details where active_merchant <> '' and
+        ((DATE_FORMAT(active_time, '%Y-%m') = '2022-02' and DATE_FORMAT(DATE_ADD(active_time,INTERVAL pk_period MONTH),'%Y-%m') > '2022-02') or
+        DATE_FORMAT(active_time, '%Y-%m') = '2022-02');
+
+SELECT count(DISTINCT active_merchant) as num from dj_2021_settle_details where active_merchant <> '' and
+        ((DATE_FORMAT(active_time, '%Y-%m') = '2020-01' and DATE_FORMAT(DATE_ADD(active_time,INTERVAL pk_period MONTH),'%Y-%m') > '2020-01') or
+        DATE_FORMAT(active_time, '%Y-%m') = '2020-01');
+
+select DATE_FORMAT(active_time, '%Y-%m') as activeTime, count(1) as num
+from dj_2021_settle_details
+where DATE_FORMAT(active_time, '%Y-%m') >= '2020-01'
+  and DATE_FORMAT(active_time, '%Y-%m') <= '2022-12'
+group by DATE_FORMAT(active_time, '%Y-%m')
+order by DATE_FORMAT(active_time, '%Y-%m');
+
+select DATE_FORMAT(EVENT_DATE, '%Y-%m') as eventDate, count(1) as num
+from ddh_rescue_event
+where DATE_FORMAT(EVENT_DATE, '%Y-%m') >= '2020-01'
+  and DATE_FORMAT(EVENT_DATE, '%Y-%m') <= '2022-12'
+group by DATE_FORMAT(EVENT_DATE, '%Y-%m')
+order by DATE_FORMAT(EVENT_DATE, '%Y-%m');
+
+select DATE_FORMAT(svrtime, '%Y-%m') as svrtime, count(1) as num
+from dj_car_maintain
+where DATE_FORMAT(svrtime, '%Y-%m') >= '2020-01'
+  and DATE_FORMAT(svrtime, '%Y-%m') <= '2022-12'
+group by DATE_FORMAT(svrtime, '%Y-%m')
+order by DATE_FORMAT(svrtime, '%Y-%m');
+
+select active_merchant ,count(1) as num
+from dj_2021_settle_details
+where DATE_FORMAT(active_time, '%Y-%m') >= '2020-01'
+  and DATE_FORMAT(active_time, '%Y-%m') <= '2022-12'
+group by active_merchant
+order by num desc limit 5;
+
+select count(1) as num
+from dj_2021_settle_details where DATE_FORMAT(active_time, '%Y-%m') = '' and active_merchant = '';
+
+select d2021sd.active_merchant, count(1) as num
+from ddh_rescue_event dre
+         left join dj_2021_settle_details d2021sd on d2021sd.sn = dre.SN
+where DATE_FORMAT(dre.EVENT_DATE, '%Y-%m') >= '2020-01'
+  and DATE_FORMAT(dre.EVENT_DATE, '%Y-%m') <= '2022-12'
+group by d2021sd.active_merchant
+order by num desc
+limit 3;
+
+select count(1) as num
+from ddh_rescue_event dre
+left join dj_2021_settle_details d2021sd on d2021sd.sn = dre.SN
+where DATE_FORMAT(dre.EVENT_DATE, '%Y-%m') >= '2020-01'
+  and DATE_FORMAT(dre.EVENT_DATE, '%Y-%m') <= '2022-12'
+and d2021sd.active_merchant = '';

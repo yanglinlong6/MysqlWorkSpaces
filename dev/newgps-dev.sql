@@ -1,1000 +1,340 @@
-select *
-from t_track_stujudge_alarm
-where sn in (96210200001, 96210200002);
+SHOW CREATE TABLE d_pingan_push_key_map;
+
+CREATE TABLE `d_pingan_push_key_map` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `workorder_id` int(11) DEFAULT NULL COMMENT '工单ID',
+  `image_name` varchar(50) DEFAULT NULL COMMENT '照片名',
+  `old_business_id` varchar(100) DEFAULT NULL COMMENT '平安系统key值(推送成功的key)',
+  `new_business_id` varchar(100) DEFAULT NULL COMMENT '平安系统key值(最新的key)',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='平安工单推送key值表'
+
+SELECT * FROM d_pingan_push_key_map WHERE workorder_id = 829302;
+
+SELECT * FROM d_vehicle_workorder dvw WHERE orderType = 'Zl'; 
+truncate TABLE  d_pingan_push_key_map;
+SELECT * FROM d_user du WHERE userRemark LIKE '%仲利%';
+
+ALTER TABLE d_feedback_param modify `sqbh` varchar(128) DEFAULT NULL COMMENT '工单申请编号';
+ALTER TABLE d_vehicle_workorder modify `sqbh` varchar(128) DEFAULT NULL COMMENT '申请单号';
+ALTER TABLE d_check_active_log modify `sqbh` varchar(128) DEFAULT NULL COMMENT '工单号';
+ALTER TABLE d_active_screen_url modify `sqbh` varchar(128) DEFAULT NULL COMMENT '申请单号';
+
+SELECT * FROM d_track_info dti WHERE dti.isActive = 0 AND dti.source = 1 ;
+select * from d_vehicle_workorder dvw WHERE sqbh = 'PA1645359554676002816';
+select * from d_track_alarm_rec dtar  ORDER BY begintime DESC ;
+select * from d_track_alarm_rec dtar  WHERE LEFT(begintime,10) = '2023-05-06' ;
+SELECT sysdate(); 
+select * from d_feedback_pa WHERE workorder_id = 829303;
+ALTER TABLE d_feedback_pa modify `status` tinyint(2) DEFAULT NULL COMMENT '1:录入工单 2:工单改约 3:工单异常 4:申请关单 5:拒绝关单 6:更新工单 7:取消工单 8:编辑照片 9:工单激活反馈 10:重推 11:获取设备可复用天数 12:复核失败推送 13:中台核验失败推送';
+ALTER TABLE d_feedback_pa modify `remark` varchar(1024) DEFAULT NULL COMMENT '备注';
+
+UPDATE d_pingan_push_key_map dppkm SET dppkm.old_business_id  = dppkm.new_business_id ,dppkm.update_time = sysdate() 
+WHERE dppkm.workorder_id =829300; 
+
+ALTER TABLE d_pingan_push_key_map DROP INDEX workorder_id_image_name;
+
+SELECT * FROM d_app_image dai WHERE dai.workOrderId = 829300; 
+
+SELECT * FROM d_app_image_delete daid WHERE daid.workOrderId = 829300; 
 
 select *
-from t_track_stujudge_alarm
-where sn = 9310772000;
-
-SELECT dti.sn
-FROM d_vehicle dv,
-     d_track_info dti,
-     d_class dc
-WHERE dti.vehicleId = dv.vehicleId
-  AND dc.classid = dv.classId
-  AND dv.status = 0
-  AND dc.vehicleGroupId IN (200);
-
-select *
-from t_track_stujudge_alarm t
-where t.alarm_type = 3
-  and t.delflag = 2
-order by t.id desc;
-
-select *
-from t_track_stujudge_alarm
-where sn in (
-             4711014006,
-             4711014013,
-             4711014037,
-             4711014065,
-             4711014057,
-             4711014029,
-             4711014096,
-             4711014010,
-             4711014008,
-             4711014093,
-             4711014036,
-             4711014034,
-             4711014022,
-             4711014032,
-             4711014094,
-             4711014069,
-             4711014012,
-             4711014098,
-             4711014081,
-             4711014015,
-             4711014024,
-             4711014086,
-             4711014062,
-             4711014085,
-             4711014025,
-             4711014091,
-             4711014020,
-             4711014063,
-             4711014033,
-             4711014028,
-             4711014071,
-             4711014095,
-             4711014001,
-             4711014054,
-             4711014044,
-             4711014017,
-             4711014049,
-             4711014055,
-             4711014002,
-             4711014007,
-             4711014064,
-             4711014074,
-             4711014027,
-             4711014048,
-             4711014087,
-             4711014068,
-             4711014076,
-             4711014097,
-             4711014004,
-             4711014070,
-             4711014100,
-             4711014067,
-             4711014058,
-             4711014043,
-             4711014038,
-             4711014077,
-             4711014014,
-             4711014080,
-             4711014040,
-             4711014084,
-             4711014011,
-             4711014059,
-             4711014053,
-             4711014082,
-             4711014009,
-             4711014083,
-             4711014005,
-             4711014051,
-             4711014092,
-             4711014089,
-             4711014021,
-             4711014075,
-             4711014042,
-             4711014079,
-             4711014066,
-             4711014088,
-             4711014072,
-             4711014030,
-             4711014052,
-             4711014019,
-             4711014031,
-             4711014026,
-             4711014016,
-             4711014041,
-             4711014045,
-             4711014050,
-             4711014060,
-             4711014056,
-             4711014035,
-             4711014046,
-             4711014047,
-             1510927176,
-             75111051090,
-             1510928296,
-             75111240208,
-             1511012663,
-             75111240862,
-             75201050986,
-             75111241929,
-             45111120326,
-             45111120452,
-             45111120466,
-             1511012660,
-             75111240852,
-             1510115677,
-             75201160550,
-             1510112585,
-             75111051100,
-             1510115673,
-             75201160551,
-             1510927166,
-             75111051081,
-             1510927189,
-             75111051086,
-             75111240204,
-             75111241544,
-             1511224181,
-             1610520319,
-             45203070553,
-             1510927193,
-             75111051097,
-             15111090754,
-             45203070935,
-             15111090757,
-             45203070942,
-             93107720006,
-             8130902327,
-             1610522773,
-             2192801101,
-             3010006003,
-             3010007001,
-             3010007000,
-             3010006999,
-             3010006004,
-             3010006005,
-             1700151515,
-             1591113211,
-             2691113936,
-             1510112899,
-             1700000001,
-             1610507001,
-             3010005989,
-             3010005933,
-             3010005933,
-             75111051416,
-             1610127312,
-             1610127300,
-             1610127297,
-             1610127307,
-             1610127299,
-             1610127306,
-             1610127303,
-             1610127301,
-             1610127298,
-             75108032084,
-             75108032085,
-             75108032075,
-             75111240322,
-             75111241284,
-             45111120391,
-             1611012312,
-             1611012313,
-             2601204222,
-             2601025417,
-             2601204204,
-             1610111616,
-             1610111624,
-             1610111618,
-             1610111619,
-             1610111615,
-             2600628225,
-             2600628223,
-             2600628222,
-             2600628228,
-             2600628224,
-             2600628221,
-             1610525087,
-             2601025374,
-             2601025381,
-             2601025400,
-             1610113004,
-             1610108136,
-             1610113259,
-             1610113270,
-             1610113262,
-             1610108146,
-             1610108192,
-             1610125392,
-             1610125393,
-             1610125403,
-             1610125401,
-             1610125388,
-             1610125394,
-             1610701065,
-             1610701050,
-             1610701225,
-             1610701066,
-             1610701220,
-             1610701070,
-             1610701223,
-             75108030030,
-             75111240485,
-             75111240484,
-             2601023676,
-             2601023679,
-             75110260157,
-             75111240614,
-             45111120832,
-             45111120827,
-             45111120831,
-             1610425192,
-             1610425188,
-             1610425189,
-             1510113901,
-             1610120911,
-             1510113903,
-             1610120906,
-             1510109116,
-             1610125598,
-             1510109117,
-             1610125607,
-             1510109113,
-             1610125591,
-             1510109123,
-             1610125608,
-             1510109122,
-             1610125590,
-             1510109120,
-             1610125596,
-             1501025232,
-             1610107329,
-             1501025279,
-             2601110913,
-             1501025272,
-             1610123652,
-             2600919073,
-             1500921686,
-             2601015674,
-             1501025280,
-             1501025235,
-             2601110917,
-             1510109383,
-             1610513444,
-             1501025230,
-             2610622164,
-             1501025227,
-             2610622131,
-             1501023730,
-             1610523414,
-             1610517946,
-             1510627838,
-             1501205445,
-             1610523383,
-             1501205457,
-             1610523390,
-             1510928987,
-             75111051425,
-             1511216218,
-             75201050757,
-             1511216219,
-             45111120688,
-             1510627402,
-             1610522620,
-             1510627404,
-             1610522612,
-             75108030052,
-             1510927101,
-             1510110401,
-             75111240843,
-             15111100233,
-             45111120707,
-             1510624159,
-             1610522750,
-             1510624149,
-             1610522745,
-             1510624148,
-             1610522756,
-             1511211117,
-             45111120083,
-             1511224205,
-             45111120377,
-             15111100267,
-             45111120372,
-             1510114506,
-             75109080197,
-             1510114507,
-             75109080178,
-             1511013222,
-             75111051268,
-             1510114508,
-             75109080191,
-             1510114505,
-             75109080193,
-             75111051204,
-             15111080194,
-             1510114509,
-             75109080179,
-             1591114499,
-             75109080184,
-             2601025560,
-             1501024922,
-             1510110214,
-             1610111606,
-             1510108990,
-             1610112716,
-             1500102710,
-             2600401246,
-             1500102764,
-             2600717542,
-             1500102751,
-             2600401295,
-             1500102722,
-             1610118138,
-             1510112541,
-             2610413023,
-             2600401236,
-             1500102752,
-             1610112757,
-             1510113558,
-             1510113557,
-             1610118159,
-             1610520227,
-             1510623593,
-             2600401282,
-             1510113574,
-             1610513502,
-             1510519109,
-             1610520226,
-             1510623586,
-             1510113572,
-             1610118134,
-             1610518455,
-             1510627873,
-             1510113573,
-             1610118136,
-             1610118129,
-             1510627576,
-             1610118130,
-             1510113570,
-             1610110123,
-             1510623596,
-             1610118141,
-             1510627584,
-             1610118133,
-             1510627589,
-             1610118135,
-             1510625699,
-             1510627591,
-             1610522645,
-             2610413057,
-             1510627819,
-             1610118131,
-             1510627578,
-             1610118140,
-             1510627583,
-             1610118132,
-             1510627581,
-             2610413006,
-             1510627810,
-             1610118137,
-             1510627588,
-             1510625687,
-             1610522716,
-             1610522644,
-             1510627781,
-             1610522631,
-             1510627787,
-             1510625537,
-             75105200529,
-             1510519008,
-             75105200054,
-             1510625551,
-             75105200509,
-             1510625552,
-             75105200512,
-             1510625543,
-             75105200518,
-             1510113556,
-             75105200055,
-             1510519000,
-             75105200053,
-             2600717230,
-             1510625541,
-             1510627887,
-             75105200659,
-             1590630891,
-             1610112375,
-             2600911886,
-             1501110577,
-             1510627513,
-             75105200033,
-             2600717218,
-             1510625550,
-             2600911879,
-             1510627520,
-             2600618999,
-             1510109025,
-             1510121620,
-             75105200613,
-             1510519007,
-             75105200067,
-             1510617805,
-             75105200694,
-             1510519011,
-             75105200068,
-             1510623682,
-             1610522183,
-             1510519013,
-             75105200064,
-             1610522224,
-             1510627788,
-             1510623671,
-             1610522178,
-             1610110230,
-             1510623978,
-             1610111620,
-             1510119435,
-             1510626012,
-             75105200533,
-             2610622898,
-             1510824223,
-             1510715173,
-             75105200075,
-             2610622866,
-             1510824226,
-             1510113780,
-             75105200685,
-             1510121621,
-             75105200616,
-             1510114493,
-             1610523091,
-             1610120038,
-             1510519006,
-             1610125497,
-             1510623974,
-             1510623683,
-             1610522177,
-             1510110200,
-             1610522693,
-             1610522634,
-             1510627795,
-             1591113257,
-             75105200639,
-             1500628380,
-             75105200628,
-             1510623673,
-             75105200629,
-             1610118139,
-             1510627775,
-             1610522633,
-             1510627782,
-             1610521427,
-             1510627780,
-             75108030004,
-             1510922251,
-             75105200664,
-             1510922249,
-             75108032012,
-             1510927123,
-             1610521434,
-             1510627774,
-             75105200601,
-             1510922695,
-             1610522190,
-             1510627783,
-             75107290253,
-             1510922208,
-             75105200644,
-             1510922699,
-             75108030006,
-             1510927112,
-             75108030007,
-             1510927103,
-             75109080439,
-             1510922678,
-             75108032002,
-             1510927148,
-             1510617777,
-             75107290241,
-             75108030042,
-             1510922692,
-             75108030035,
-             1510927146,
-             75107290256,
-             97110140098,
-             1610911970,
-             1510922685,
-             75108030009,
-             97110140096,
-             1610516548,
-             1510627798,
-             1610911967,
-             1510922688,
-             75110260742,
-             1511025792,
-             75110260941,
-             1511025743,
-             75110260744,
-             1511025789,
-             75110260735
-    )
-  and delflag = 2;
-
-select *
-from d_electric_fence;
-
-select area, areaId
-from d_vehicle_workorder
-where sqbh = 'PA1595344984117219328';
-
-select area, areaId, area_id
-from d_vehicle_workorder
-where orderType = 'pazl';
-
-update d_vehicle_workorder
-set areaId = area
-where orderType = 'pazl';
-
-select *
-from d_city
-where level = 'district';
-
-select *
-from t_city
-where full_name like '%北京市%';
-
-select tc.full_name as area, tc1.full_name as city, tc2.full_name as province
-from t_city tc
-         left join t_city tc1 on tc1.id = tc.parent_id
-         left join t_city tc2 on tc2.id = tc1.parent_id
-where tc.id = 110000;
-
-select *
-from d_electric_fence
-where id = 743;
-
-select dv.idnum, dv.name as ownerName, dv.standno
-from d_vehicle dv
-         left join d_electric_fence_sns defs on defs.standno = dv.standno
-         left join d_electric_fence def on def.id = defs.fenceId
-where def.id = 770;
-
-select dti.sn
-from d_vehicle dv
-         left join d_track_info dti on dti.userId = dv.userId
-where dv.status = 0
-  and dv.standno = 'GLCW2021102010001';
-
-select dv.idnum, dv.name as ownerName
-from d_vehicle dv
-         left join d_track_info dti on dti.userId = dv.userId
-where dv.status = 0
-  and dti.sn = 32146525113;
-
-select dv.idnum, dv.name as ownerName
-from d_vehicle dv
-         left join d_track_info dti on dti.userId = dv.userId
-where dv.status = 0
-  and dti.sn = 8160602923;
-
-select *
-from d_vehicle_workorder
-where orderType = 'pazl'
-  and status = 1;
-
-select *
-from d_vehicle
-where workOrderId = 829136;
-
-CREATE TABLE `d_location_check_log`
-(
-    `id`          int(11)  NOT NULL AUTO_INCREMENT COMMENT 'id',
-    `sn`          varchar(256) DEFAULT NULL COMMENT '设备号',
-    `remark`      varchar(256) DEFAULT NULL COMMENT '设备定位备注',
-    `create_time` datetime null comment '创建时间',
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 1
-  DEFAULT CHARSET = utf8 COMMENT ='设备定位验证日志表';
-
-CREATE TABLE `d_feedback_param`
-(
-    `id`                     int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-    `order_id`               int(11)      DEFAULT NULL COMMENT '工单ID',
-    `sqbh`                   varchar(50)  DEFAULT NULL COMMENT '工单申请编号',
-    `vin`                    varchar(50)  DEFAULT NULL COMMENT '车架号',
-    `actual_install_address` varchar(256) DEFAULT NULL COMMENT '实际按照地址',
-    `actual_install_name`    varchar(256) DEFAULT null comment '实际安装人',
-    `create_time`            datetime     DEFAULT null comment '创建时间',
-    PRIMARY KEY (`id`),
-    KEY `idx_order_id` (`order_id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 1
-  DEFAULT CHARSET = utf8 COMMENT ='平安工单激活反馈参数';
-
-select *
-from t_track_stujudge_alarm;
+from d_pingan_push_key_map a
+where a.workorder_id = #{workOrderId} and a.new_business_id = #{newKey};
 
 
-select dv.vehicleId,
-       dv.name       as ownerName,
-       dvw.shopName,
-       dvw.sqbh,
-       dv.standno,
-       dvw.source,
-       dvw.no_source as noSource,
-       dv.createtime as createTime,
-       dvw.standnoHash
-from d_vehicle dv
-         left join d_vehicle_workorder dvw on dvw.workOrderId = dv.workOrderId
-where dv.status = 0
-  and dvw.status = 1
-#           and dvw.standnoHash = #{standnoHash}
-order by createTime desc
+SELECT * FROM d_vehicle_workorder dvw WHERE dvw.orderType = 'PAZl' AND status = 0 ORDER BY createtime DESC;
 
-select *
-from d_vehicle_workorder
-where standnoHash = 'e604888b7e67eb49700838ce1c6f7cc0';
+SELECT * FROM d_pingan_push_key_map;
 
-select workOrderId
-from d_vehicle
-where standno = 'LYF16666634802940';
+INSERT INTO d_pingan_push_key_map (workorder_id	,image_name	,old_business_id,new_business_id,create_time)
+SELECT dap.workOrderId ,dap.imageName ,dap.business_id ,dap.business_id ,sysdate()  
+FROM  d_app_image dap 
+LEFT JOIN d_vehicle_workorder dvw ON dvw.workOrderId = dap.workOrderId  
+WHERE dvw.orderType = 'PAZL' AND dap.business_id IS NOT NULL ;
 
-select *
-from d_vehicle_workorder
-where workOrderId = 829254;
+SELECT * FROM d_vehicle_workorder dvw WHERE dvw.sqbh = 'PA1643883073869320192';
+SELECT * FROM d_vehicle dv WHERE dv.workOrderId = 829302;
+SELECT * FROM d_class dc WHERE dc.classid = 88889040; 
+SELECT * FROM d_class dc WHERE dc.classid = 88889357; 
+SELECT * FROM d_group dg WHERE dg.vehicleGroupId = 200;
+SELECT * FROM d_class dc WHERE dc.vehicleGroupId  = 200; 
+SELECT * FROM d_vehicle_workorder_rep ORDER BY id DESC ;
+UPDATE d_vehicle_workorder_rep SET status =0;
 
-select *
-from d_feedback_param;
+update qrtz_triggers
+set NEXT_FIRE_TIME = (unix_timestamp()+10)*1000
+where TRIGGER_NAME = 'ghVehicleWorkOrderTrigger';
 
-select *
-from d_track_info
-where isActive = 0
-  and source = 1;
+SELECT *  from `qrtz_cron_triggers` where trigger_name = 'ghVehicleWorkOrderTrigger';
+SELECT *  from `qrtz_triggers` where trigger_name = 'ghVehicleWorkOrderTrigger';
+SELECT *  from `qrtz_job_details` where job_name = 'ghVehicleWorkOrderTrigger';
 
-select *
-from d_location_check_log;
+SELECT *  from `qrtz_cron_triggers` where trigger_name in (
+'syncInsuranceToEquityOrderTrigger',
+'gqWindReportMonitorTrigger',
+'deviceWithoutLocationMonitorForYXTrigger',
+'effectiveTestDriveReportMonitorTrigger',
+'jysendBasestationTaskTrigger',
+'gqVehicleOfflineTrigger',
+'fiveDaysWithoutLocationTrigger2'
+);
 
-select *
-from t_track_stujudge_alarm
-where sn = '1570921349';
+SELECT *  from `qrtz_triggers` where trigger_name in (
+'gqWindReportMonitorTrigger',
+'deviceWithoutLocationMonitorForYXTrigger',
+'effectiveTestDriveReportMonitorTrigger',
+'jysendBasestationTaskTrigger',
+'gqVehicleOfflineTrigger',
+'fiveDaysWithoutLocationTrigger2'
+);
 
-select *
-from d_user
-where username = 'pingan';
+SELECT *  from `qrtz_job_details` where job_name in (
+'gqWindReportMonitorTrigger',
+'deviceWithoutLocationMonitorForYXTrigger',
+'effectiveTestDriveReportMonitorTrigger',
+'jysendBasestationTaskTrigger',
+'gqVehicleOfflineTrigger',
+'fiveDaysWithoutLocationTrigger2'
+);
 
-select *
-from d_user
-where username = 'admin';
+DELETE  from `qrtz_cron_triggers` where trigger_name in (
+'ghVehicleWorkOrderTrigger'
+);
 
-explain
-select dv.vehicleId,
-       dv.name       as ownerName,
-       dvw.shopName,
-       dvw.sqbh,
-       dv.standno,
-       dvw.source,
-       dvw.no_source as noSource,
-       dvw.workOrderId
-from d_vehicle dv
-         left join d_vehicle_workorder dvw on dvw.workOrderId = dv.workOrderId
-where dv.status = 0
-  and dvw.status = 1
-  and dvw.standnoHash = 'e604888b7e67eb49700838ce1c6f7cc0'
-order by dv.vehicleId desc;
+DELETE  from `qrtz_triggers` where trigger_name in (
+'ghVehicleWorkOrderTrigger'
+);
 
-select *
-from d_vehicle_workorder
-where standnoHash = 'e604888b7e67eb49700838ce1c6f7cc0';
+DELETE  from `qrtz_job_details` where job_name in (
+'ghVehicleWorkOrderTrigger'
+);
 
-select *
-from d_vehicle_workorder
-where sqbh = 'PA1539170682351521792';
+SELECT *FROM d_user du WHERE username = 'zlgj';
+SELECT *FROM d_user du WHERE du.d_LoginUserId = 651;
 
-select *
-from d_vehicle
-where standno = 'PA12*********6543';
+SELECT * FROM d_device_login ddl WHERE ddl.sn  = '1700112234'; 
 
-insert into d_vehicle_workorder(classId, name, identityCard, standno, standnoHash, userTel, userSex, shopContacts,
-                                contactsPhone, fix_time, status, lastLoginUserId, activeTime, activeMan, sendStatus,
-                                area, shopName, color, brandid, brand, carType, carTypeName, carSystem, carSystemName,
-                                isDvd, creditPeriod, rent, address, cycle, ishandsel, branch, branchCompanyTel, sqbh,
-                                orderNum, projectNum, contractNo, createtime, idnum, noticeUser, engine, displacement,
-                                remark, importdate, description, createUserId, productType, province, city, orderType,
-                                orderSource, creditLimit, installMethod, shop_addr, fix_area, fix_phone, source,
-                                no_source, obd_cnt, pa, record, areaId, dispatchEmail, insuranceFlag, fund,
-                                isselfcollection, business_type, install_name, message_phone, area_id, gongdanId,
-                                contractId, refOrderId, bizOrderType, gpsSupplier, vehicle_type, vehiclePrice,
-                                insurancePolicyHolder, insuranceFirstBeneficiary, insuranceCertificate,
-                                insuranceTelephone)
-select classId,
-       name,
-       identityCard,
-       standno,
-       standnoHash,
-       userTel,
-       userSex,
-       shopContacts,
-       contactsPhone,
-       fix_time,
-       status,
-       lastLoginUserId,
-       activeTime,
-       activeMan,
-       sendStatus,
-       area,
-       shopName,
-       color,
-       brandid,
-       brand,
-       carType,
-       carTypeName,
-       carSystem,
-       carSystemName,
-       isDvd,
-       creditPeriod,
-       rent,
-       address,
-       cycle,
-       ishandsel,
-       branch,
-       branchCompanyTel,
-       sqbh,
-       orderNum,
-       projectNum,
-       contractNo,
-       createtime,
-       idnum,
-       noticeUser,
-       engine,
-       displacement,
-       remark,
-       importdate,
-       description,
-       createUserId,
-       productType,
-       province,
-       city,
-       orderType,
-       orderSource,
-       creditLimit,
-       installMethod,
-       shop_addr,
-       fix_area,
-       fix_phone,
-       source,
-       no_source,
-       obd_cnt,
-       pa,
-       record,
-       areaId,
-       dispatchEmail,
-       insuranceFlag,
-       fund,
-       isselfcollection,
-       business_type,
-       install_name,
-       message_phone,
-       area_id,
-       gongdanId,
-       contractId,
-       refOrderId,
-       bizOrderType,
-       gpsSupplier,
-       vehicle_type,
-       vehiclePrice,
-       insurancePolicyHolder,
-       insuranceFirstBeneficiary,
-       insuranceCertificate,
-       insuranceTelephone
-from d_vehicle_workorder
-where workOrderId = 829213;
+SELECT * FROM d_gps_config WHERE typeNo = 'email';	
+select * from d_vehicle_insurance;;
 
-insert into d_vehicle (idnum, classId, vehicleTypeId, displacement, buyDate, mileage, name, standno, noticuser, userSex,
-                       userTel, shopcontactor, shopPhone, lastLoginUserId, createtime, updatetime, userId, isSubUserId,
-                       workOrderId, endtime, isuse, engine, remark, description, status, fix_time, validateStatus, acc,
-                       validateInfo, createUserId, activeUserId, sync_neshield_flag)
-SELECT idnum,
-       classId,
-       vehicleTypeId,
-       displacement,
-       buyDate,
-       mileage,
-       name,
-       standno,
-       noticuser,
-       userSex,
-       userTel,
-       shopcontactor,
-       shopPhone,
-       lastLoginUserId,
-       createtime,
-       updatetime,
-       userId,
-       isSubUserId,
-       829275,
-       endtime,
-       isuse,
-       engine,
-       remark,
-       description,
-       status,
-       fix_time,
-       validateStatus,
-       acc,
-       validateInfo,
-       createUserId,
-       activeUserId,
-       sync_neshield_flag
-from d_vehicle
-where vehicleId = 805768;
+SELECT dvi.full_insurance_no AS contractNo,
+       DATE_FORMAT(dvi.createTime,'%Y-%m-%d %H:%i:%s')  AS successDate,
+       dg.groupName  AS merchantName,
+       dvi.name AS customerName,
+       dvi.mobile AS customerPhone,
+       dvi.status AS status,
+       DATE_FORMAT(dvi.endTime,'%Y-%m-%d %H:%i:%s') AS endTime,
+       DATE_FORMAT(dvi.takeEffectTime,'%Y-%m-%d %H:%i:%s')  AS effectiveDate,
+       dvi.standno AS vin,
+       dvi.vehicleBrand AS vehicleBrandName,
+       dvi.vehicleType AS vehicleSeriesName, 
+       dvi.id AS sourceId,
+       DATE_FORMAT(dvi.updateTime,'%Y-%m-%d %H:%i:%s') AS updateTime,
+       du.userRemark AS updatedBy
+FROM d_vehicle_insurance dvi LEFT JOIN	d_vehicle dv ON dv.vehicleId  = dvi.vehicleId 
+LEFT JOIN d_class dc ON dc.classid = dv.classId 
+LEFT JOIN d_group dg ON dg.vehicleGroupId = dc.vehicleGroupId 
+LEFT JOIN d_user du ON du.d_LoginUserId = dv.createUserId
+WHERE dvi.status IN (1,3) AND 
+(DATE_FORMAT(dvi.createTime, '%Y-%m-%d')= DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 DAY), '%Y-%m-%d') 
+OR DATE_FORMAT(dvi.updateTime, '%Y-%m-%d')= DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 DAY), '%Y-%m-%d')
+);
 
-select *
-from d_feedback_param;
+SELECT * FROM d_track_alarm_rec dtar  WHERE dtar.sn = '75111051092'; 
+SELECT * FROM d_track_info dti WHERE dti.sn = '75111051092';
+SELECT * FROM d_track_info dti WHERE dti.source  = 0;
+SELECT dtar.* FROM d_track_alarm_rec dtar LEFT JOIN d_track_info dti ON dti.sn =  dtar.sn WHERE dtar.alarmType  = 99;
+SELECT * FROM t_track_stujudge_alarm ttsa WHERE ttsa.sn = 1591126165; 
 
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1482200741698473984', 'LFV3214G3C3090321', '广东省深圳市南山区桃园路', 'jack测试');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1482203282842718208', 'LFV3214G3C3090323', '广东省深圳市南山区桃园路', 'jack测试');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022011800001', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022011800002', '12345678998765431', '广东省深圳市南山区仙科路', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022011800003', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012000001', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012000002', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1484401471117201408', 'LFV3*********0401', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1484401729326944256', 'LFV3*********0402', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012400001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012400002', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012400003', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012500002', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012500001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202202160002', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202202160003', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202202160004', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1539170682351521792', 'PA123456789876543', '北京市朝阳区石景山公园', '流传奇');
+update qrtz_triggers
+set NEXT_FIRE_TIME = (unix_timestamp()+30)*1000
+where TRIGGER_NAME = 'syncInsuranceToEquityOrderTrigger';
 
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1482200741698473984', 'LFV3214G3C3090321', '广东省深圳市南山区桃园路', 'jack测试');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1482203282842718208', 'LFV3214G3C3090323', '广东省深圳市南山区桃园路', 'jack测试');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022011800001', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022011800002', '12345678998765431', '广东省深圳市南山区仙科路', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022011800003', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012000001', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012000002', '1234*********5433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1484401471117201408', 'LFV3*********0401', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1484401729326944256', 'LFV3*********0402', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012400001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012400002', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012400003', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012500002', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX2022012500001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202202160002', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202202160003', '12345678998765432', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202202160004', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202203210001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202203210005', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202203230001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202203300001', '12345678998765433', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1526132883562041344', 'PA123202205161729', '广东省深圳市龙华区观盛东路', '实名认证');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1526133271866511360', 'PA123202205161731', '广东省深圳市龙华区观盛东路', '实名认证');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202205170001', '12345678998765433', '广东省深圳市龙华区观盛东路', '实名认证');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202205170002', '12345678998765433', '广东省深圳市龙华区观盛东路', '实名认证');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGL-392254-2022PAZL106109569-ZL-01-0606103201504', 'W1K6X6BB0NA114188', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGL-392254-2022PAZL106109569-ZL-01-0607102618174', '1FDWW37P67EB14803', '广东省深圳市南山区留仙大道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGL-392254-2022PAZL106109569-ZL-01-0607162437530', '1G8JW54R73Y585474', '广东省深圳市福田区滨河大道辅道', '扫码2');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1538708515496005632', 'PA123456789876543', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1538790231879323648', 'PA20*********5001', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202206210001', '12345678998765433', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202206230001', '12345678998765431', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202206230003', '12345678998765433', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202206230004', '12345678998765434', '广东省深圳市南山区桃园路2号', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202206230006', '12345678998765436', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202206230005', '12345678998765435', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202206260002', '12345678998765432', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202206260003', '12345678998765433', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202206260004', '12345678998765434', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1541303280058109952', 'PA202206271411001', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1541303717511434240', 'PA202206271412001', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1541304219716423680', 'PA202206271415001', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1541304426243952640', 'PA202206271416001', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202206260005', '12345678998765434', '广东省深圳市南山区仙科路', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1563096539402997760', 'PA123202208261729', '广东省深圳市南山区塘益路191-1号', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PAGLSX202210120001', '12345678998765434', '广东省深圳市南山区塘益路191-1号', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1589505950459498496', 'PA123202211071431', '广东省深圳市南山区塘益路191-1号', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1595682824223068160', 'PA123202205161731', '广东省深圳市南山区桃园路2号', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1600049792334041088', 'PA123202205161731', '广东省深圳市南山区桃园路2号', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1601155952730574848', 'PA123202205161735', '广东省深圳市南山区桃园路2号', 'xjq');
-INSERT INTO d_feedback_param(sqbh, vin, actual_install_address, actual_install_name)
-VALUES ('PA1607637216824266752', 'PA123202205161741', '广东省深圳市南山区桃园路2号', 'xjq');
+SELECT *  from `qrtz_cron_triggers` where trigger_name in (
+'zLGpsDailyMonitorTrigger'
+);
+
+SELECT *  from `qrtz_triggers` where trigger_name in (
+'zLGpsDailyMonitorTrigger'
+);
+
+select eda.sn as sn, count(1) as offlineTimes from eshield_device_alarm eda where eda.alarm_type = 2  
+and eda.sn in ( '14149258475','14149258476','14149258476','1590000008' ) group by eda.sn
+
+select dtar.sn, count(*) as countRec from d_track_alarm_rec dtar 
+WHERE dtar.alarmType = 99 AND dtar.sn IN ('1511224229','1610522773','1680521003','2192801101') group by dtar.sn;
 
 
-update d_feedback_param dfp left join d_vehicle_workorder dvw on dvw.sqbh = dfp.sqbh
-set dfp.order_id = dvw.workOrderId
-where dvw.status = 0;
+SELECT * FROM d_track_alarm_rec;  
 
-select *
-from t_track_stujudge_alarm;
+select dtar.sn, dtar.alarmType , dtar.lng as lng, dtar.lat as lat, dtar.lasttime as lasttime, dtar.begintime as begintime from d_track_alarm_rec dtar where dtar.delflag = 0 and dtar.sn = '8131206335' and dtar.alarmType = 6;
 
-select *
-from d_app_image
-where workOrderId = 829278;
 
-select *
-from d_app_image_delete
-where workOrderId = 829278;
+select dtar.sn, count(*) as countRec from d_track_alarm_rec dtar where dtar.sn in ('1511224229','1610522773','1680521003','2192801101','8131206335' ) and dtar.alarmType = 6 group by dtar.sn;
 
-select *
-from d_device_login
-where sn in (1700112234, 1570916886);
+
+select eda.sn as sn,eda.alarm_type , count(1) as offlineTimes from eshield_device_alarm eda GROUP BY eda.sn;
+
+
+select dtar.sn, dtar.lng, dtar.lat, dtar.lasttime, dtar.begintime  from d_track_alarm_rec dtar where dtar.delflag = 0
+AND dtar.alarmType = 6;
+
+SELECT * FROM t_track_stujudge_alarm WHERE delflag = 2;
+SELECT *FROM d_device_login;
+
+
+SELECT * FROM t_track_stujudge_alarm WHERE poi_type = '非长停地';
+UPDATE t_track_stujudge_alarm SET poi_type = '非常停地' WHERE poi_type = '非长停地';
+
+SELECT * FROM d_track_info dti WHERE dti.isActive  = 0 AND dti.source = 1;
+SELECT * FROM d_track_info dti WHERE dti.sn  = '1570717414';
+SELECT * FROM d_track_info dti WHERE dti.sn  = '1570921346';
+SELECT * FROM d_track_info dti WHERE dti.sn  like '93%';
+SELECT * FROM d_track_alarm_rec dtar WHERE dtar.sn = '96541445375';
+SELECT * FROM d_track_alarm_rec dtar WHERE dtar.sn = '93107720006';
+
+select ed.id , edc.name
+        from eshield_device ed
+                 inner join eshield_device_classify edc on ed.classifyId = edc.id
+        where ed.id = 130021 limit 0,1;
+       
+SELECT * FROM d_group dg WHERE dg.groupName LIKE '%平安%'; 
+
+SELECT dti.sn,dti.source 
+       FROM d_vehicle dv,
+       d_track_info dti,
+       d_class dc
+       WHERE dti.vehicleId = dv.vehicleId
+       AND dc.classid = dv.classId
+       AND dv.status = 0
+       AND dc.vehicleGroupId IN (200);
+      
+SELECT * FROM d_track_alarm_rec WHERE alarmType = 15;
+
+SELECT * FROM d_vehicle_workorder dvw WHERE sqbh = 'PA1643883073869320192';
+SELECT * FROM t_track_stujudge_alarm ttsa WHERE ttsa.sn = '1500102752' AND alarm_type = 2 AND delflag = 2; 
+UPDATE t_track_stujudge_alarm SET poi_type = '非常住地' WHERE poi_type = '非常停地';
+
+       
+       
+SELECT * FROM d_vehicle_workorder WHERE workOrderId  = 829956;
+ALTER TABLE d_vehicle_workorder ADD `addFlag` varchar(32) DEFAULT NULL COMMENT '平安工单加装单标志 1：是 0：否' AFTER tradeEntity;
+ALTER TABLE d_vehicle_workorder ADD `threeCodeFlag` tinyint(2) DEFAULT 0 COMMENT '修改三码合一标志位 1：可修改 0：不可修改' AFTER addFlag;
+ALTER TABLE d_vehicle_workorder DROP `addFlag`;
+ALTER TABLE d_vehicle_workorder DROP `threeCodeFlag`;
+SELECT * FROM d_track_info dti WHERE sn LIKE '96%';
+select * from d_track_alarm_rec WHERE delflag = 0;
+SELECT * FROM d_vehicle_workorder_rep ORDER BY id DESC ;
+ALTER TABLE d_vehicle_workorder_rep modify `title` varchar(500) DEFAULT NULL;
+
+SELECT dv.standno as vin, dti.sn, dti.source,dvw.sqbh 
+        FROM d_vehicle_workorder dvw
+                 LEFT JOIN d_vehicle dv ON dv.workOrderId = dvw.workOrderId
+                 LEFT JOIN d_track_info dti ON dti.vehicleId = dv.vehicleId
+        WHERE  dv.status = 0
+          AND dvw.status in (0, 1) AND dvw.sqbh = '219858' ;
+
+
+select * from d_track_alarm_rec dtar ;
+CREATE TABLE d_track_alarm_rec_basic LIKE d_track_alarm_rec;
+select * from d_track_alarm_rec_basic;
+
+alter table d_device_freq drop command_id ;
+select * from d_device_freq;
+alter table d_device_freq add command_id varchar(256)  DEFAULT NULL COMMENT '平安传递过来的命令id' AFTER duration;
+
+SELECT * FROM d_device_freq;
+
+SELECT ddf.battery_level AS batteryLevel, LEFT(ddf.create_time, 19) AS createTime, ddf.freq_type AS freqType,
+        LEFT(dv.createtime,19) AS activeTime, ddf.channel AS channel, du.username AS operation,
+        ddf.catching_timer AS catchingTimer, ddf.timer AS timer, ddf.week AS week, ddf.week_timer AS weekTimer,
+        TIMESTAMPDIFF(MINUTE, ddf.create_time, ddf.update_time) AS diffMinuteTime,
+        TIMESTAMPDIFF(DAY, ddf.create_time, ddf.update_time) AS diffDayTime,
+        ddf.sn AS sn, dv.standno AS standno, dv.name AS name,
+               ddf.`status`        AS freqStatus,
+               ddf.duration        AS duration,
+               ddf.response_status AS responseStatus
+        FROM d_device_freq ddf
+        LEFT JOIN d_vehicle dv ON ddf.vehicle_id = dv.vehicleId
+        LEFT JOIN d_user du ON du.d_LoginUserId = dv.lastLoginUserId
+        WHERE ddf.sn = '2370716049'
+        ORDER BY ddf.create_time DESC;
+       
+SELECT * FROM d_device_freq;     
+SELECT * FROM d_track_info dti  WHERE isActive  = 0;
+
+SELECT * FROM d_track_alarm_rec dtar WHERE sn = '1570921451';
+SELECT * FROM d_track_alarm_rec WHERE sn = '1570915965';
+SELECT * FROM d_track_alarm_rec WHERE sn = '2691212737';
+
+SELECT * FROM t_track_stujudge_alarm ttsa WHERE alarm_type = 3;
+SELECT * FROM t_track_stujudge_alarm ttsa WHERE sn = '1570921451';
+
+SELECT * FROM d_group dg ;
+SELECT * FROM d_class dc WHERE dc.vehicleGroupId = 200; 
+SELECT DISTINCT  dti.sn  FROM d_vehicle dv 
+LEFT JOIN d_track_info dti ON dti.vehicleId = dv.vehicleId 
+WHERE dv.classId = 88889355;
+
+SELECT * FROM d_feedback_pa; 
+SELECT * FROM d_settle; 
+
+
+
+SELECT * FROM d_alarm_process_rec; 
+
+SELECT v.name,v.standno,o.sn,b.vehicleTypeName as carType,o.cityname,o.alarmType,o.begintime as alarmTime,o.lng,o.lat,o.alarmid,v.workOrderId,v.acc,dc.vehicleGroupId ,dpr.status as alarmStatus,t.activeDate activeDate  
+FROM  d_track_alarm_rec o 	
+INNER JOIN  d_track_info  t ON o.sn=t.sn	
+LEFT JOIN d_alarm_process_rec dpr ON dpr.sn = o.sn AND dpr.alarmType = o.alarmType AND dpr.warnStartTime = o.begintime	
+INNER JOIN  d_vehicle v  ON t.vehicleId=v.vehicleId
+LEFT JOIN d_vehicle_brand_type b ON b.vehicleTypeId=v.vehicleTypeId
+LEFT JOIN d_class dc ON v.classId=dc.classId
+WHERE v.status=0 and o.delflag=0 and v.classId <> 90;
+
+SELECT o.*,v.* ,t.* ,dl.* FROM d_track_alarm_rec_history o
+INNER JOIN d_track_info t ON o.sn = t.sn
+INNER  JOIN  d_vehicle v ON  t.vehicleId = v.vehicleId
+LEFT JOIN d_device_login dl ON o.sn = dl.sn
+WHERE v.status=0  AND v.classId <> 90 AND o.sn = '8130902098';
+
+SELECT * FROM d_track_alarm_rec_history WHERE sn = '8130902098'; 
+
+-- gps.d_track_alarm_rec_history definition
+
+select o.*,v.*,t.*,dl.* from d_track_alarm_rec_history o,d_vehicle v,d_track_info t , d_device_login dl
+ where o.sn=t.sn and t.vehicleId=v.vehicleId and dl.sn=o.sn and v.status=0 and v.classId <>90
+and o.sn in('8130902098')
+order by o.alarmid DESC;
+
+SELECT * FROM d_track_info WHERE sn =  '8130902098';
+SELECT * FROM d_vehicle dv WHERE vehicleId = 2066;
+SELECT * FROM d_device_login ddl WHERE ddl.sn = '8130902098';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
