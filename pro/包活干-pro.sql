@@ -533,6 +533,8 @@ SELECT * FROM sys_service_mechanic;
 SELECT * FROM sys_area sa WHERE id = 440300; 
 SELECT * FROM sys_area sa WHERE area_name = '南山区'; 
 
+SELECT * FROM sys_order_ocr_vin_result WHERE db_vin = 'JTEBX3FJ3BK054563';
+SELECT * FROM sys_order_ocr_sn_result WHERE order_id =  437939;
 
 
 

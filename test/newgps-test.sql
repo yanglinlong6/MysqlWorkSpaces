@@ -412,12 +412,57 @@ select ti.trackerId as trackerId,ti.imei as imei,ti.sn as sn,ti.imsi as imsi,ti.
 SELECT * FROM d_track_info WHERE  isActive = 0 AND source = 0;
 
 SELECT * FROM d_track_alarm_rec_history; 
+SELECT DISTINCT  fund  FROM d_vehicle_workorder dvw ; 
+
+SELECT * FROM  d_track_info dti WHERE sn = '15211280320';
+SELECT * FROM d_vehicle dv WHERE dv.vehicleId = 805996;
+SELECT * FROM d_class dc WHERE classid = 88888968; 
+SELECT * FROM d_user du WHERE d_LoginUserId = 3519; 
 
 
+SELECT dti.sn
+        FROM d_vehicle dv,
+        d_track_info dti,
+        d_class dc
+        WHERE dti.vehicleId = dv.vehicleId
+        AND dc.classid = dv.classId
+        AND dv.status = 0
+        AND dc.vehicleGroupId IN (79);
 
+SELECT * FROM d_user_role dur WHERE dur.d_LoginUserId = 3519;       
+SELECT * FROM  d_role_vehicle_group drvg WHERE drvg.roleId = 2983;
 
+SELECT drvg.d_rvg_id,drvg.`type`,drvg.typeVal,drvg.roleId FROM d_user_role dur
+LEFT JOIN d_role_vehicle_group drvg ON drvg.roleId = dur.roleId
+LEFT JOIN d_role dr ON dr.roleId = dur.roleId
+WHERE dr.status = 0 AND dur.d_LoginUserId = 3519;
 
+SELECT dti.sn
+        FROM d_vehicle dv,
+        d_track_info dti,
+        d_class dc
+        WHERE dti.vehicleId = dv.vehicleId
+        AND dc.classid = dv.classId
+        AND dv.status = 0
+        AND dc.vehicleGroupId IN (79);	 
 
+SELECT drvg.d_rvg_id, drvg.`type`, drvg.typeVal, drvg.roleId
+        FROM d_user_role dur
+                 LEFT JOIN d_role_vehicle_group drvg ON drvg.roleId = dur.roleId
+                 LEFT JOIN d_role dr ON dr.roleId = dur.roleId
+        WHERE dr.status = 0
+          AND dur.d_LoginUserId = '3519';
+         
+SELECT dti.sn
+        FROM d_vehicle dv,
+             d_track_info dti
+        WHERE dti.vehicleId = dv.vehicleId
+          AND dv.status = 0
+          AND dv.classid IN (88889360,88889291); 
+SELECT * FROM d_track_info dti WHERE dti.sn = '15211280320';   
+SELECT * FROM d_vehicle dv WHERE dv.vehicleId = 805996;
+SELECT * FROM d_class dc WHERE dc.classid = 88888968;
+SELECT * FROM d_group dg WHERE dg.vehicleGroupId =  79;
 
 
 

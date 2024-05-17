@@ -314,6 +314,22 @@ SELECT * FROM d_track_info WHERE sn =  '8130902098';
 SELECT * FROM d_vehicle dv WHERE vehicleId = 2066;
 SELECT * FROM d_device_login ddl WHERE ddl.sn = '8130902098';
 
+SELECT * FROM d_track_info dti WHERE dti.sn = '75107290990'; 
+SELECT * FROM d_vehicle dv WHERE dv.vehicleId = 805653;
+SELECT * FROM d_role_vehicle_group; 
+SELECT * FROM d_user du WHERE du.username = 'pingan';
+SELECT drvg.d_rvg_id, drvg.`type`, drvg.typeVal, drvg.roleId
+        FROM d_user_role dur
+                 LEFT JOIN d_role_vehicle_group drvg ON drvg.roleId = dur.roleId
+                 LEFT JOIN d_role dr ON dr.roleId = dur.roleId
+        WHERE dr.status = 0
+          AND dur.d_LoginUserId = '3511';
+SELECT dti.sn
+        FROM d_vehicle dv,
+             d_track_info dti
+        WHERE dti.vehicleId = dv.vehicleId
+          AND dv.status = 0
+          AND dv.classid IN (88889355)      
 
 
 

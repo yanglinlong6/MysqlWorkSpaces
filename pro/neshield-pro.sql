@@ -688,6 +688,37 @@ SELECT * FROM  t_vehicle_device tvd WHERE tvd.vehicle_id IN (69503,69504);
 DELETE FROM t_vehicle WHERE id = 69503;
 DELETE FROM t_vehicle_device WHERE id IN (116913,116914);
 
+SELECT * FROM t_tenant; -- 租户(组织表)
+SELECT * FROM t_department; -- 部门表
+SELECT * FROM t_organization; -- 组织层级表
+SELECT * FROM t_user; -- 用户表
+SELECT * FROM t_user_path; -- 用户层级表
+SELECT * FROM t_role; -- 角色表
+SELECT * FROM t_role_tenant; -- 角色和组织关联表
+SELECT * FROM t_user_role_relation; -- 角色和用户关联表
+SELECT * FROM t_role_menu; -- 角色和菜单关联表
+SELECT * FROM t_menu; -- 菜单表
+SELECT * FROM t_menu_permission; -- 菜单权限表
+
+SELECT * FROM t_workorder; -- 工单表
+SELECT * FROM t_workorder_vehicle; -- 工单车辆信息表
+SELECT * FROM t_workorder_vehicle_device; -- 未激活(待审核时)工单车辆绑定设备信息表
+SELECT * FROM t_vehicle; -- 车辆表
+SELECT * FROM t_vehicle_device; -- 车辆设备绑定关系表
+SELECT * FROM t_device; -- 设备表
+SELECT * FROM t_device_location; -- 设备定位表
+
+SELECT * FROM t_user tu ; 
+SELECT * FROM t_cust_user_local_auth ; -- 本地用户表
+SELECT * FROM t_cust_user_local_account ; -- 用户本地账户表
+SELECT * FROM t_cust_user_auth_rel ; -- 用户登录认证关联表
+SELECT * FROM t_cust_user ; -- C端客户表
+
+SELECT * FROM t_user tu WHERE id  = 1;
+SELECT * FROM t_cust_user_local_auth  WHERE id = 1;
+SELECT * FROM t_cust_user_third_auth; 
+SELECT * FROM t_cust_user_wechat_account; 
+SELECT * FROM t_cust_user_auth_rel ;
 
        
 

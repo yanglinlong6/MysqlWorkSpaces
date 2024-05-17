@@ -22,7 +22,7 @@ SELECT * FROM dj_2023_settle_details_return WHERE settle_time >= '2023-08-01';
 SELECT sum(cost) FROM  dj_2023_settlment_order_finance WHERE cus_name = '云南隆创尚通汽车销售服务有限公司' AND LEFT(finance_time,7) = '2023-07' AND product_type = '硬件' AND total > 0;
 SELECT * FROM  dj_2023_settlment_order_finance WHERE cus_name = '云南隆创尚通汽车销售服务有限公司' AND LEFT(finance_time,7) = '2023-07' AND product_type = '硬件' AND total > 0;
 SELECT sum(cost) FROM  dj_2023_settlment_order WHERE cus_name = '云南隆创尚通汽车销售服务有限公司' AND LEFT(finance_time,7) = '2023-07' AND product_type = '硬件' AND total > 0;
-SELECT * FROM  dj_2022_settlment_order_06plus WHERE cus_name = '河北酷嘉汽车服务有限公司';
+SELECT * FROM  dj_2022_settlment_order_06plus WHERE cus_name = '河北酷嘉汽车服务有限公司';	
 SELECT * FROM dj_device_details WHERE settle_merchant = '河北酷嘉汽车服务有限公司';
 SELECT * FROM dj_2021_settle_details WHERE settle_merchant = '云南隆创尚通汽车销售服务有限公司' AND `return` = 0 AND LEFT(settle_time,7) =  '2023-07';
 SELECT sum(hw_cost)  FROM dj_2021_settle_details WHERE settle_merchant = '云南隆创尚通汽车销售服务有限公司'  AND LEFT(settle_time,7) =  '2023-07';

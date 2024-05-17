@@ -1694,7 +1694,7 @@ SELECT * FROM  d_vehicle_workorder WHERE sqbh IN (
 'PATBX-3388008-2023PAZL101375867-ZL-01-0417104716438-1784927588309929984'
 );
 
-SELECT * FROM d_track_info; 
+SELECT * FROM d_track_info WHERE sn = '1511013290'; 
 SELECT count(1)  FROM  d_vehicle_workorder; 
 SELECT count(1)  FROM  d_vehicle;
 SELECT count(1)  FROM  d_track_info dti WHERE LEFT(createtime,7)>= '2024-05';
@@ -1705,33 +1705,35 @@ SELECT count(1)  FROM  d_class WHERE LEFT(createtime,7)>= '2024-05';
 SELECT count(1)  FROM  d_group WHERE LEFT(createtime,7)>= '2024-05';
 SELECT count(1)  FROM  d_user WHERE LEFT(createtime,7)>= '2024-05';
 
- SELECT
-	roleinsura0_.id AS id67_0_,
-	userrole1_.user_role_id AS user1_65_1_,
-	roleinsura0_.classid AS classid67_0_,
-	roleinsura0_.device_combine AS device3_67_0_,
-	roleinsura0_.group_attach AS group4_67_0_,
-	roleinsura0_.groupid AS groupid67_0_,
-	roleinsura0_.insurance_company AS insurance6_67_0_,
-	roleinsura0_.insurance_period AS insurance7_67_0_,
-	roleinsura0_.needInstall AS needInst8_67_0_,
-	roleinsura0_.permission AS permission67_0_,
-	roleinsura0_.permissionByFail AS permiss10_67_0_,
-	roleinsura0_.roleid AS roleid67_0_,
-	roleinsura0_.sendSms AS sendSms67_0_,
-	roleinsura0_.special_permission AS special13_67_0_,
-	roleinsura0_.toc AS toc67_0_,
-	userrole1_.roleId AS roleId65_1_,
-	userrole1_.d_LoginUserId AS d3_65_1_
-FROM
-	d_role_insurance roleinsura0_
-CROSS JOIN d_user_role userrole1_
-WHERE
-	userrole1_.roleId = roleinsura0_.roleid
-	AND userrole1_.d_LoginUserId = 4493;
+SELECT * FROM d_user WHERE d_LoginUserId = 4474;
+SELECT * from d_role_insurance ri,d_user_role ur where ur.roleId = ri.roleid and ur.d_LoginUserId=4474;
 
-SELECT * FROM d_track_alarm_rec_history; 
+SELECT count(dti.trackerId) AS activeDeviceNumber,
+DATE_FORMAT(dti.activeDate,'%H') as activeDate
+FROM d_track_info dti LEFT JOIN d_vehicle dv ON dv.vehicleId = dti.vehicleId
+WHERE 1 = 1
+AND dti.isActive=1 GROUP BY DATE_FORMAT(dti.activeDate,'%H');
 
+SELECT * FROM d_special_promise_insurance; 
+SELECT * FROM d_vehicle_brand; 
+SELECT * FROM d_vehicle_brand_type; 
+SELECT * FROM d_track_info WHERE sn = '1630105618' AND isActive = 0; 
+DELETE FROM d_track_info WHERE sn = '1630105618' AND isActive = 0;
+
+ 
+SELECT * FROM d_group; --  分组表
+SELECT * FROM d_class; --  分类表
+SELECT * FROM d_user; --  用户表
+SELECT * FROM d_user_role; --  用户角色表
+SELECT * FROM d_role; --  角色表
+SELECT * FROM d_vehicle; --  车辆表
+SELECT * FROM d_vehicle_workorder; --  工单表
+SELECT * FROM d_track_info; -- 设备表
+SELECT * FROM d_vehicle_insurance; -- 保单表
+
+-- 常用警情表:
+SELECT * FROM d_track_alarm_rec; --  光感和断电警情表
+SELECT * FROM t_track_stujudge_alarm; --  研判警情表
 
 
 

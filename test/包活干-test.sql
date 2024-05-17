@@ -455,6 +455,56 @@ SELECT * FROM sys_indent_import_device;
 
 SELECT * FROM sys_area sa ; 
 
+SELECT * FROM sys_indent;
+SELECT * FROM sys_device WHERE device_no IN (1570717414,1570921461);
+SELECT * FROM sys_device WHERE indent_no IN ('8000202405101');
+SELECT * FROM sys_indent_logistics;
+SELECT * FROM sys_indent_log;
+SELECT * FROM sys_device_repertory; 
+SELECT * FROM sys_delivery sd ;
+SELECT * FROM sys_logistics sl ; 
+SELECT * FROM sys_service_mechanic; 
+SELECT * FROM sys_area sa ; 
+SELECT * FROM sys_user su WHERE id = 576; 
+SELECT * FROM sys_user su WHERE id = 688; 
+SELECT * FROM sys_manager WHERE user_id  = 576; 
+SELECT * FROM sys_user su WHERE user_type = 1; 
+SELECT * FROM sys_dict_data WHERE data_key = 'sys_order_service_item_gps_wireless'; 
+
+SELECT * FROM sys_manager WHERE  provider_name = 'aaa123456';
+SELECT * FROM sys_service_mechanic WHERE service_id  = 576;
+SELECT * FROM sys_mechanic WHERE user_id IN (694,695);
+SELECT * FROM sys_user su WHERE id IN (578);
+
+SELECT
+        sd.id id,
+        sdd.data_value deviceName,
+        sd.device_no deviceNo,
+        sd.stock_time stockTime,
+        sd.remark remark,
+        su.name name
+        FROM
+        sys_device sd
+        LEFT JOIN sys_user su ON sd.user_id = su.id
+        LEFT JOIN sys_dict_data sdd ON sd.device_type = sdd.data_key
+        LEFT JOIN sys_indent si ON sd.indent_no = si.indent_no
+        WHERE ( (si.indent_status = 40 AND sd.device_source = 1) OR sd.device_source IN (2,3))
+        AND sd.device_status = 1
+        AND
+        sd.user_id IN (
+        select
+        ssm.mechanic_id
+        from sys_service_mechanic ssm
+        where ssm.service_id = 1365
+        )
+--         <if test="mechanicId != null">
+--             and sd.user_id = #{mechanicId}
+--         </if>
+--         <if test="deviceNo != null and deviceNo != ''">
+--             and sd.device_no LIKE concat('%',#{deviceNo},'%')
+--         </if>
+            and sd.device_type = 'sys_order_service_item_gps'
+        ORDER BY sd.stock_time DESC
 
 
 
